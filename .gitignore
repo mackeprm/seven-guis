@@ -1,0 +1,5 @@
+.idea/
+.shadow-cljs/
+node_modules/
+public/js/compiled/
+package-lock.json
