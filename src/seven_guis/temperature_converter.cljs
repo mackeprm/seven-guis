@@ -2,15 +2,25 @@
   (:require [reagent.core :as r]))
 
 
-(defonce converter-state 0)
+(defonce converter-state (r/atom 0.0))
 
-;; The formula for converting a temperature C in Celsius into a temperature F in Fahrenheit is C = (F - 32) * (5/9) and the dual direction is F = C * (9/5) + 32.
-;; TODO on-change/on-update
+;; F = C * (9/5) + 32.
+(defn to-fahrenheit [celsius]
+  (+ (* celsius (/ 9.0 5.0)) 32.0))
+
+;; C = (F - 32) * (5/9)
+(defn to-celsius [fahrenheit]
+  (* (- fahrenheit 32) (/ 5.0 9.0)))
+
 (defn app []
-      [:div
-       [:h1 "2. Temperature Converter"]
-       [:input {:type :number}]
-       [:label "Celsius = "]
-       [:input {:type :number}]
-       [:label "Fahrenheit"]
-       ])
+  [:div
+   [:h1 "2. Temperature Converter"]
+   [:input {:type      :number
+            :value     @converter-state
+            :on-change #(reset! converter-state (-> % .-target .-value))}]
+   [:label "Celsius = "]
+   [:input {:type      :number
+            :value     (to-fahrenheit @converter-state)
+            :on-change #(reset! converter-state (to-celsius (-> % .-target .-value)))}]
+   [:label "Fahrenheit"]
+   ])

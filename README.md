@@ -24,6 +24,17 @@ npm run clean
 npm run release
 ```
 
+## Open in Cursive
+
+*Cursive does not currently support resolving dependencies via shadow-cljs.edn. You can run shadow-cljs pom to generate
+a pom.xml and import that using the IntelliJ.*
+
+``` shell
+shadow-cljs pom
+```
+
+https://shadow-cljs.github.io/docs/UsersGuide.html#_cursive
+
 ## License
 
 Copyright © 2017 mackeprm
